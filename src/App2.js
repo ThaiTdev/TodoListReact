@@ -1,13 +1,12 @@
 import { useReducer } from "react";
 import AddTodo from "./components/AddTodo";
 import TodoListe from "./components/TodoList";
-import TestReducer from "./reducers/testReducer";
 import ThemeContext from "./context/Theme";
-
+import TodoReducer from "./reducers/TodoReducer";
 // import Test from "./components/Test";
 
 function App() {
-  const [state, dispatch] = useReducer(TestReducer, {
+  const [state, dispatch] = useReducer(TodoReducer, {
     theme: "primary",
     todoList: [],
   });
@@ -18,48 +17,33 @@ function App() {
       content,
     });
   }
-  function deleteTodo(id) {
-    dispatch({
-      type: "DELETE_TODO",
-      id,
-    });
-  }
-  function toggleValidate(id) {
-    dispatch({
-      type: "TOGGLE_VALIDE_TODO",
-      id,
-    });
-  }
-  function toggleEdit(id) {
-    dispatch({
-      type: "TOGGLE_TODO",
-      id,
-    });
-  }
-  function ajoutNumber1(id) {
-    dispatch({
-      type: "NUMBER_TODO",
-      id,
-    });
-  }
-  function editTodo(id, content) {
-    dispatch({
-      type: "EDIT_TODO",
-      content,
-      id,
-    });
-  }
+
   function selectTodo(id) {
-    dispatch({
-      type: "SELECT_TODO",
-      id,
-    });
+    dispatch({ type: "SELECT_TODO", id });
   }
+
+  function deleteTodo(id) {
+    dispatch({ type: "DELETE_TODO", id });
+  }
+
+  function ajoutNumber1(id) {
+    dispatch({ type: "NUMBER_TODO", id });
+  }
+
+  function toggleValidate(id) {
+    dispatch({ type: "TOGGLE_TODO", id });
+  }
+
+  function toggleEdit(id) {
+    dispatch({ type: "TOGGLE_EDIT_TODO", id });
+  }
+
+  function editTodo(id, content) {
+    dispatch({ type: "EDIT_TODO", id, content });
+  }
+
   function handleChange(e) {
-    dispatch({
-      type: "UPDATE_THEME",
-      theme: e.target.value,
-    });
+    dispatch({ type: "SET_THEME", theme: e.target.value });
   }
 
   return (
